@@ -7,12 +7,55 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tv_menu_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="@string/app_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.16000003"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/iv_menu_bg_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/main_menu_bg_image_description"
+        android:scaleType="centerInside"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/card_honors_spade14"
+        tools:srcCompat="@drawable/card_honors_spade14" />
+
+    <TextView
+        android:id="@+id/tv_main_menu_app_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_author"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_menu_bg_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/iv_menu_bg_image"
+        app:layout_constraintTop_toBottomOf="@+id/tv_menu_title"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <Button
+        android:id="@+id/btn_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/play_buton"
+        app:layout_constraintBottom_toTopOf="@+id/tv_main_menu_app_author"
+        app:layout_constraintEnd_toEndOf="@+id/iv_menu_bg_image"
+        app:layout_constraintStart_toStartOf="@+id/iv_menu_bg_image"
+        app:layout_constraintTop_toTopOf="@+id/iv_menu_bg_image"
+        app:layout_constraintVertical_bias="0.88"
+        android:onClick="playGame" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
