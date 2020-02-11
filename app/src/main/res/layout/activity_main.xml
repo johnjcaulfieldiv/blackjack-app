@@ -26,12 +26,10 @@
         android:contentDescription="@string/main_menu_bg_image_description"
         android:scaleType="centerInside"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btn_play"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/tv_menu_title"
         app:srcCompat="@drawable/card_honors_spade14"
         tools:srcCompat="@drawable/card_honors_spade14" />
 
@@ -40,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_author"
-        app:layout_constraintBottom_toBottomOf="@+id/iv_menu_bg_image"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/iv_menu_bg_image"
         app:layout_constraintTop_toBottomOf="@+id/tv_menu_title"
@@ -50,12 +48,12 @@
         android:id="@+id/btn_play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/play_buton"
+        android:onClick="playGame"
+        android:text="@string/play_button"
         app:layout_constraintBottom_toTopOf="@+id/tv_main_menu_app_author"
-        app:layout_constraintEnd_toEndOf="@+id/iv_menu_bg_image"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/iv_menu_bg_image"
-        app:layout_constraintTop_toTopOf="@+id/iv_menu_bg_image"
-        app:layout_constraintVertical_bias="0.88"
-        android:onClick="playGame" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_menu_title"
+        app:layout_constraintVertical_bias="0.87" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

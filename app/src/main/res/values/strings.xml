@@ -3,7 +3,7 @@
     <string name="app_name">BlackJack</string>
     <string name="main_menu_bg_image_description">background image for main menu</string>
     <string name="app_author">by John Caulfield</string>
-    <string name="play_buton">Play</string>
+    <string name="play_button">Play</string>
 
 
 </resources>
