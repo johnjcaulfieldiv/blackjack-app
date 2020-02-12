@@ -1,4 +1,4 @@
-package com.caulfield.john.blackjack.Game;
+package com.caulfield.john.blackjack.blackjack;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,6 +19,7 @@ public class Deck {
             deck.add(new Card(val, "h"));
             deck.add(new Card(val, "s"));
         }
+        shuffle();
     }
 
     /* leaves the deck empty */
@@ -28,6 +29,13 @@ public class Deck {
     }
 
     public Card draw() {
+        if (empty()) {
+            while (discard.size() > 0) {
+                deck.add(discard.get(discard.size()-1));
+                discard.remove(discard.size()-1);
+            }
+            shuffle();
+        }
         int top = deck.size()-1;
         Card topCard = deck.get(top);
         deck.remove(top);
@@ -44,5 +52,18 @@ public class Deck {
 
     public boolean empty() {
         return deck.size() == 0;
+    }
+
+    public Card getTopCard() {
+        return deck.get(deck.size()-1);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (Card c : deck) {
+            sb.append(c.getVal() + c.getSuit() + " ");
+        }
+        return sb.toString();
     }
 }

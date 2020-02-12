@@ -1,4 +1,4 @@
-package com.caulfield.john.blackjack.Game;
+package com.caulfield.john.blackjack.blackjack;
 
 import com.caulfield.john.blackjack.R;
 

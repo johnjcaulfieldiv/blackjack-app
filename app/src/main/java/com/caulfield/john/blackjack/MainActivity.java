@@ -2,6 +2,7 @@ package com.caulfield.john.blackjack;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -18,5 +19,7 @@ public class MainActivity extends AppCompatActivity {
     public void playGame(View view) {
         // TODO remove toast and play game
         Toast.makeText(this.getApplicationContext(), "Starting game...", Toast.LENGTH_SHORT).show();
+        Intent playGameIntent = new Intent(this, PlayGame.class);
+        startActivity(playGameIntent);
     }
 }
