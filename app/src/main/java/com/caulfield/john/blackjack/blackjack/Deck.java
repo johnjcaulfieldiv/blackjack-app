@@ -46,6 +46,10 @@ public class Deck {
         deck.add(c);
     }
 
+    public void addCardToDiscard(Card c) {
+        discard.add(c);
+    }
+
     public void shuffle() {
         Collections.shuffle(deck);
     }

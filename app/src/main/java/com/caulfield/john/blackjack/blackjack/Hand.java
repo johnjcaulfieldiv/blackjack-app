@@ -49,6 +49,13 @@ public class Hand {
         value = 0;
     }
 
+    public void discardHand(Deck deckToEmptyTo) {
+        while (!cards.empty()) {
+            deckToEmptyTo.addCardToDiscard(cards.draw());
+        }
+        value = 0;
+    }
+
     public int getValue() {
         return value;
     }

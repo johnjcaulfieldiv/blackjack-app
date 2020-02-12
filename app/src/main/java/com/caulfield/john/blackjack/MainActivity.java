@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     /* called when 'Play' button is pressed */
     public void playGame(View view) {
-        // TODO remove toast and play game
-        Toast.makeText(this.getApplicationContext(), "Starting game...", Toast.LENGTH_SHORT).show();
         Intent playGameIntent = new Intent(this, PlayGame.class);
         startActivity(playGameIntent);
     }
