@@ -62,6 +62,10 @@ public class Deck {
         return deck.get(deck.size()-1);
     }
 
+    protected ArrayList<Card> getCardsInDeck() {
+        return deck;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

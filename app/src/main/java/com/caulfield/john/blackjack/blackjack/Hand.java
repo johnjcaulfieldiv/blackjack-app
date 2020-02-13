@@ -15,11 +15,18 @@ public class Hand {
         int drawnValue = drawn.getVal();
         switch (drawnValue) {
             case 1:
-                // TODO implement actual ace calculations for value
-                if (value + 11 <= 21)
-                    value += 11;
+                value = 0;
+                int aces = 0;
+                for (Card c : cards.getCardsInDeck()) {
+                    if (c.getVal() == 1)
+                        aces += 1;
+                    else
+                        value += c.getVal();
+                }
+                if (value + 11 + aces-1 <= 21)
+                    value += 11 + aces-1;
                 else
-                    value += 1;
+                    value += aces;
                 break;
             case 2:
             case 3:
