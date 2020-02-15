@@ -1,2 +1,2 @@
 # blackjack-app
-App to play blackjack 
+Simple Android app to play blackjack 
