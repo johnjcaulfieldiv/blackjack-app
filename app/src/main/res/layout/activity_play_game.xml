@@ -136,21 +136,43 @@
 
     <LinearLayout
         android:id="@+id/layout_blackjack_player_linear_layout"
-        android:layout_width="205dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="1dp"
+        android:background="@drawable/linearlayoutborder"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tv_center"
+        app:layout_constraintHorizontal_bias="0.03"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.58000004"></LinearLayout>
 
     <LinearLayout
         android:id="@+id/layout_blackjack_dealer_linear_layout"
-        android:layout_width="205dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/linearlayoutborder"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@+id/layout_blackjack_player_linear_layout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_center"
         app:layout_constraintTop_toTopOf="@+id/layout_blackjack_player_linear_layout"></LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

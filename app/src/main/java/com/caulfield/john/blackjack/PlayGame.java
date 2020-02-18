@@ -7,7 +7,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.caulfield.john.blackjack.blackjack.BlackJack;
 
@@ -25,8 +24,6 @@ public class PlayGame extends AppCompatActivity {
 
     private BlackJack mBlackjack;
 
-    private ConstraintLayout mBlackjackLayout;
-
     private LinearLayout mPlayerLayout;
     private LinearLayout mDealerLayout;
 
@@ -35,7 +32,6 @@ public class PlayGame extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_game);
 
-        // find textviews
         mDealerHandTV = (TextView) findViewById(R.id.tv_dealer_hand);
         mPlayerHandTV = (TextView) findViewById(R.id.tv_player_hand);
         mDealerValTV  = (TextView) findViewById(R.id.tv_dealer_val);
@@ -46,15 +42,12 @@ public class PlayGame extends AppCompatActivity {
         mStayButton      = (Button) findViewById(R.id.btn_stay);
         mPlayAgainButton = (Button) findViewById(R.id.btn_play_again);
 
-        mBlackjackLayout = (ConstraintLayout) findViewById(R.id.layout_game_activity_layout);
-
         mPlayerLayout = (LinearLayout) findViewById(R.id.layout_blackjack_player_linear_layout);
         mDealerLayout = (LinearLayout) findViewById(R.id.layout_blackjack_dealer_linear_layout);
 
-
         // start a new game of blackjack
         mBlackjack = new BlackJack(mDealerValTV, mPlayerValTV, mDealerHandTV, mPlayerHandTV, mGameResultTV,
-                mHitButton, mStayButton, mPlayAgainButton, mBlackjackLayout, this, this, mPlayerLayout, mDealerLayout);
+                mHitButton, mStayButton, mPlayAgainButton, this, mPlayerLayout, mDealerLayout);
         mBlackjack.startNewHand();
     }
 

@@ -1,38 +1,32 @@
 package com.caulfield.john.blackjack.blackjack;
 
-import android.app.Activity;
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
-
-import java.util.ArrayList;
-
 public class BlackJack {
     private final Deck deck;
     private final Hand player;
     private final Hand dealer;
 
+    // UI
+    private Context context;
+        // TextViews
     private TextView tv_dealer_val;
     private TextView tv_player_val;
-
-    // temp
     private TextView tv_dealer_hand;
     private TextView tv_player_hand;
     private TextView tv_game_result;
+        // Buttons
     private Button btn_new_game;
     private Button btn_hit;
     private Button btn_stay;
-    private Activity activity;
+        // Layouts for card images
     private LinearLayout playerLayout;
     private LinearLayout dealerLayout;
-
-    private Context context;
 
     public BlackJack() {
         deck = new Deck();
@@ -41,8 +35,7 @@ public class BlackJack {
     }
 
     public BlackJack(TextView tv_dealer_val, TextView tv_player_val, TextView tv_dealer_hand, TextView tv_player_hand, TextView tv_game_result,
-                     Button btn_hit, Button btn_stay, Button btn_new_game, ConstraintLayout layout, Context context, Activity activity,
-                     LinearLayout playerFrame, LinearLayout dealerFrame) {
+                     Button btn_hit, Button btn_stay, Button btn_new_game, Context context, LinearLayout playerFrame, LinearLayout dealerFrame) {
         this();
         this.tv_dealer_val = tv_dealer_val;
         this.tv_player_val = tv_player_val;
@@ -53,7 +46,6 @@ public class BlackJack {
         this.btn_new_game = btn_new_game;
         this.btn_stay = btn_stay;
         this.context = context;
-        this.activity = activity;
         this.playerLayout = playerFrame;
         this.dealerLayout = dealerFrame;
     }
@@ -180,7 +172,8 @@ public class BlackJack {
     private void addCardImageToLayout(Card c, LinearLayout linearLayout) {
         ImageView cardImage = new ImageView(context);
         cardImage.setImageResource(c.getImageId());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         params.weight = 1.0f;
         params.width = 0;
         cardImage.setLayoutParams(params);
