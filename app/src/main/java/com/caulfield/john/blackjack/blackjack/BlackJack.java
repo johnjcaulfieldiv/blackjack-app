@@ -2,15 +2,16 @@ package com.caulfield.john.blackjack.blackjack;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BlackJack {
     private final Deck deck;
@@ -27,12 +28,9 @@ public class BlackJack {
     private Button btn_new_game;
     private Button btn_hit;
     private Button btn_stay;
-    private ConstraintLayout layout;
     private Activity activity;
-    private List<ImageView> playerImages;
-    private List<ImageView> dealerImages;
-    private int playerImageIndex;
-    private int dealerImageIndex;
+    private LinearLayout playerLayout;
+    private LinearLayout dealerLayout;
 
     private Context context;
 
@@ -40,13 +38,11 @@ public class BlackJack {
         deck = new Deck();
         player = new Hand();
         dealer = new Hand();
-        playerImages = new ArrayList<>();
-        dealerImages = new ArrayList<>();
     }
 
     public BlackJack(TextView tv_dealer_val, TextView tv_player_val, TextView tv_dealer_hand, TextView tv_player_hand, TextView tv_game_result,
                      Button btn_hit, Button btn_stay, Button btn_new_game, ConstraintLayout layout, Context context, Activity activity,
-                     ArrayList<ImageView> playerImages, ArrayList<ImageView> dealerImages) {
+                     LinearLayout playerFrame, LinearLayout dealerFrame) {
         this();
         this.tv_dealer_val = tv_dealer_val;
         this.tv_player_val = tv_player_val;
@@ -56,13 +52,10 @@ public class BlackJack {
         this.btn_hit = btn_hit;
         this.btn_new_game = btn_new_game;
         this.btn_stay = btn_stay;
-        this.layout = layout;
         this.context = context;
         this.activity = activity;
-        this.playerImages = playerImages;
-        this.dealerImages = dealerImages;
-        playerImageIndex = 0;
-        dealerImageIndex = 0;
+        this.playerLayout = playerFrame;
+        this.dealerLayout = dealerFrame;
     }
 
     public void clearUI() {
@@ -72,14 +65,8 @@ public class BlackJack {
         tv_player_hand.setText("");
         tv_game_result.setVisibility(View.INVISIBLE);
 
-        for (ImageView iv : playerImages) {
-            iv.setVisibility(View.INVISIBLE);
-        }
-        playerImageIndex = 0;
-        for (ImageView iv : dealerImages) {
-            iv.setVisibility(View.INVISIBLE);
-        }
-        dealerImageIndex = 0;
+        playerLayout.removeAllViews();
+        dealerLayout.removeAllViews();
     }
 
     private void disableButton(Button b) {
@@ -98,11 +85,11 @@ public class BlackJack {
         enableButton(btn_stay);
         clearUI();
         player.drawFrom(deck);
-        showPlayerCard(player.getTopCard());
+        addCardImageToLayout(player.getTopCard(), playerLayout);
         dealer.drawFrom(deck);
-        showDealerCard(dealer.getTopCard());
+        addCardImageToLayout(dealer.getTopCard(), dealerLayout);
         player.drawFrom(deck);
-        showPlayerCard(player.getTopCard());
+        addCardImageToLayout(player.getTopCard(), playerLayout);
         updateUI();
         checkForGameOver();
     }
@@ -141,18 +128,18 @@ public class BlackJack {
 
     public void hit() {
         player.drawFrom(deck);
-        showPlayerCard(player.getTopCard());
+        addCardImageToLayout(player.getTopCard(), playerLayout);
         updateUI();
         checkForGameOver();
     }
 
     public void stay() {
         dealer.drawFrom(deck);
-        showDealerCard(dealer.getTopCard());
+        addCardImageToLayout(dealer.getTopCard(), dealerLayout);
         if (player.getValue() <= 21) {
             while (dealer.getValue() < player.getValue()) {
                 dealer.drawFrom(deck);
-                showDealerCard(dealer.getTopCard());
+                addCardImageToLayout(dealer.getTopCard(), dealerLayout);
             }
         }
         endGame();
@@ -190,15 +177,13 @@ public class BlackJack {
         dealer.discardHand(deck);
     }
 
-    private void showPlayerCard(Card c) {
-        ImageView cardImageView = playerImages.get(playerImageIndex++);
-        cardImageView.setImageResource(c.getImageId());
-        cardImageView.setVisibility(View.VISIBLE);
-    }
-
-    private void showDealerCard(Card c) {
-        ImageView cardImageView = dealerImages.get(dealerImageIndex++);
-        cardImageView.setImageResource(c.getImageId());
-        cardImageView.setVisibility(View.VISIBLE);
+    private void addCardImageToLayout(Card c, LinearLayout linearLayout) {
+        ImageView cardImage = new ImageView(context);
+        cardImage.setImageResource(c.getImageId());
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        params.weight = 1.0f;
+        params.width = 0;
+        cardImage.setLayoutParams(params);
+        linearLayout.addView(cardImage);
     }
 }

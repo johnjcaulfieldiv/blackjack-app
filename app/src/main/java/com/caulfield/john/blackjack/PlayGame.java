@@ -1,17 +1,15 @@
 package com.caulfield.john.blackjack;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.caulfield.john.blackjack.blackjack.BlackJack;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
-import java.util.ArrayList;
+import com.caulfield.john.blackjack.blackjack.BlackJack;
 
 public class PlayGame extends AppCompatActivity {
 
@@ -29,8 +27,8 @@ public class PlayGame extends AppCompatActivity {
 
     private ConstraintLayout mBlackjackLayout;
 
-    private ArrayList<ImageView> mPlayerCardImageList;
-    private ArrayList<ImageView> mDealerCardImageList;
+    private LinearLayout mPlayerLayout;
+    private LinearLayout mDealerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,30 +48,13 @@ public class PlayGame extends AppCompatActivity {
 
         mBlackjackLayout = (ConstraintLayout) findViewById(R.id.layout_game_activity_layout);
 
-        mPlayerCardImageList = new ArrayList<ImageView>();
-        mPlayerCardImageList.add((ImageView)findViewById(R.id.iv_player1));
-        mPlayerCardImageList.add((ImageView)findViewById(R.id.iv_player2));
-        mPlayerCardImageList.add((ImageView)findViewById(R.id.iv_player3));
-        mPlayerCardImageList.add((ImageView)findViewById(R.id.iv_player4));
-        mPlayerCardImageList.add((ImageView)findViewById(R.id.iv_player5));
-        mPlayerCardImageList.add((ImageView)findViewById(R.id.iv_player6));
-        mPlayerCardImageList.add((ImageView)findViewById(R.id.iv_player7));
-        mPlayerCardImageList.add((ImageView)findViewById(R.id.iv_player8));
-
-        mDealerCardImageList = new ArrayList<ImageView>();
-        mDealerCardImageList.add((ImageView)findViewById(R.id.iv_dealer1));
-        mDealerCardImageList.add((ImageView)findViewById(R.id.iv_dealer2));
-        mDealerCardImageList.add((ImageView)findViewById(R.id.iv_dealer3));
-        mDealerCardImageList.add((ImageView)findViewById(R.id.iv_dealer4));
-        mDealerCardImageList.add((ImageView)findViewById(R.id.iv_dealer5));
-        mDealerCardImageList.add((ImageView)findViewById(R.id.iv_dealer6));
-        mDealerCardImageList.add((ImageView)findViewById(R.id.iv_dealer7));
-        mDealerCardImageList.add((ImageView)findViewById(R.id.iv_dealer8));
+        mPlayerLayout = (LinearLayout) findViewById(R.id.layout_blackjack_player_linear_layout);
+        mDealerLayout = (LinearLayout) findViewById(R.id.layout_blackjack_dealer_linear_layout);
 
 
         // start a new game of blackjack
         mBlackjack = new BlackJack(mDealerValTV, mPlayerValTV, mDealerHandTV, mPlayerHandTV, mGameResultTV,
-                mHitButton, mStayButton, mPlayAgainButton, mBlackjackLayout, this, this, mPlayerCardImageList, mDealerCardImageList);
+                mHitButton, mStayButton, mPlayAgainButton, mBlackjackLayout, this, this, mPlayerLayout, mDealerLayout);
         mBlackjack.startNewHand();
     }
 
