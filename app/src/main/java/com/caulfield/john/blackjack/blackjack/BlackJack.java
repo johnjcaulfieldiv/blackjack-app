@@ -7,10 +7,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.caulfield.john.blackjack.R;
+
 public class BlackJack {
     private final Deck deck;
     private final Hand player;
     private final Hand dealer;
+
+    // Application reference
+    private AppCompatActivity application;
 
     // UI
     private Context context;
@@ -34,20 +41,20 @@ public class BlackJack {
         dealer = new Hand();
     }
 
-    public BlackJack(TextView tv_dealer_val, TextView tv_player_val, TextView tv_dealer_hand, TextView tv_player_hand, TextView tv_game_result,
-                     Button btn_hit, Button btn_stay, Button btn_new_game, Context context, LinearLayout playerFrame, LinearLayout dealerFrame) {
+    public BlackJack(AppCompatActivity application) {
         this();
-        this.tv_dealer_val = tv_dealer_val;
-        this.tv_player_val = tv_player_val;
-        this.tv_dealer_hand = tv_dealer_hand;
-        this.tv_player_hand = tv_player_hand;
-        this.tv_game_result = tv_game_result;
-        this.btn_hit = btn_hit;
-        this.btn_new_game = btn_new_game;
-        this.btn_stay = btn_stay;
-        this.context = context;
-        this.playerLayout = playerFrame;
-        this.dealerLayout = dealerFrame;
+        this.application = application;
+        this.context = application;
+        this.tv_dealer_val = application.findViewById(R.id.tv_dealer_val);
+        this.tv_player_val = application.findViewById(R.id.tv_player_val);
+        this.tv_dealer_hand = application.findViewById(R.id.tv_dealer_hand);
+        this.tv_player_hand = application.findViewById(R.id.tv_player_hand);
+        this.tv_game_result = application.findViewById(R.id.tv_game_result);
+        this.btn_new_game = application.findViewById(R.id.btn_play_again);
+        this.btn_hit = application.findViewById(R.id.btn_hit);
+        this.btn_stay = application.findViewById(R.id.btn_stay);
+        this.dealerLayout = application.findViewById(R.id.layout_blackjack_dealer_linear_layout);
+        this.playerLayout = application.findViewById(R.id.layout_blackjack_player_linear_layout);
     }
 
     public void clearUI() {
