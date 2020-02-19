@@ -18,7 +18,7 @@ public class PlayGame extends AppCompatActivity {
         setContentView(R.layout.activity_play_game);
 
         // amount of money player has to bet in blackjack
-        mPlayersMoney = 20;
+        mPlayersMoney = 100;
 
         // start a new game of blackjack
         mBlackjack = new BlackJack(this, mPlayersMoney);
