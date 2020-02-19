@@ -45,6 +45,8 @@ public class Hand {
         return value;
     }
 
+    public int getSize() { return cards.getCardsInDeck().size(); }
+
     public Card getTopCard() {
         return cards.getTopCard();
     }

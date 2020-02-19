@@ -1,6 +1,8 @@
 package com.caulfield.john.blackjack.blackjack;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,11 +12,15 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.caulfield.john.blackjack.R;
+import com.caulfield.john.blackjack.YoureBroke;
 
 public class BlackJack {
+    private static final int BET_AMOUNT = 10;
+
     private final Deck deck;
     private final Hand player;
     private final Hand dealer;
+    private int playerCash;
 
     // Application reference
     private AppCompatActivity application;
@@ -27,6 +33,7 @@ public class BlackJack {
     private TextView tv_dealer_hand;
     private TextView tv_player_hand;
     private TextView tv_game_result;
+    private TextView tv_player_cash;
         // Buttons
     private Button btn_new_game;
     private Button btn_hit;
@@ -39,10 +46,12 @@ public class BlackJack {
         deck = new Deck();
         player = new Hand();
         dealer = new Hand();
+        playerCash = 0;
     }
 
-    public BlackJack(AppCompatActivity application) {
+    public BlackJack(AppCompatActivity application, int playerCash) {
         this();
+        this.playerCash = playerCash;
         this.application = application;
         this.context = application;
         this.tv_dealer_val = application.findViewById(R.id.tv_dealer_val);
@@ -50,6 +59,7 @@ public class BlackJack {
         this.tv_dealer_hand = application.findViewById(R.id.tv_dealer_hand);
         this.tv_player_hand = application.findViewById(R.id.tv_player_hand);
         this.tv_game_result = application.findViewById(R.id.tv_game_result);
+        this.tv_player_cash = application.findViewById(R.id.tv_player_cash);
         this.btn_new_game = application.findViewById(R.id.btn_play_again);
         this.btn_hit = application.findViewById(R.id.btn_hit);
         this.btn_stay = application.findViewById(R.id.btn_stay);
@@ -79,6 +89,12 @@ public class BlackJack {
     }
 
     public void startNewHand() {
+        if (playerCash < 10) {
+            playerIsBroke();
+            return;
+        }
+        playerCash -= 10;
+        updatePlayerCash(playerCash);
         disableButton(btn_new_game);
         enableButton(btn_hit);
         enableButton(btn_stay);
@@ -112,7 +128,13 @@ public class BlackJack {
             tv_game_result.setText("PUSH!");
         }
         else if (pVal == 21) {
-            tv_game_result.setText("Blackjack!\nYou Win!");
+            if (player.getSize() == 2) {
+                tv_game_result.setText("Blackjack!");
+                endGameWithBlackJack();
+                return;
+            }
+            else
+                tv_game_result.setText("21, You Win!");
         }
         else if (dVal == 21) {
             tv_game_result.setText("Dealer wins with 21!");
@@ -152,19 +174,44 @@ public class BlackJack {
 
         if (dVal > 21) {
             tv_game_result.setText("Dealer busts!\nYou win!");
+            playerCash += 2 * BET_AMOUNT;
         }
         else if (pVal > 21) {
             tv_game_result.setText("Busted!\nTry again");
         }
         else if (pVal > dVal) {
             tv_game_result.setText("You win!");
+            playerCash += 2 * BET_AMOUNT;
         }
         else if (pVal == dVal) {
             tv_game_result.setText("Push!");
+            playerCash += BET_AMOUNT;
         }
         else {
             tv_game_result.setText("Dealer takes this hand!");
         }
+
+        updatePlayerCash(playerCash);
+
+        tv_game_result.setVisibility(View.VISIBLE);
+
+        disableButton(btn_hit);
+        disableButton(btn_stay);
+        enableButton(btn_new_game);
+
+        player.discardHand(deck);
+        dealer.discardHand(deck);
+    }
+
+    private void endGameWithBlackJack() {
+        Log.v(this.getClass().getSimpleName(), "Ending game with player blackjack!");
+        dealer.drawFrom(deck);
+        addCardImageToLayout(dealer.getTopCard(), dealerLayout);
+
+        updateUI();
+
+        playerCash += 2.5 * BET_AMOUNT;
+        updatePlayerCash(playerCash);
 
         tv_game_result.setVisibility(View.VISIBLE);
 
@@ -185,5 +232,15 @@ public class BlackJack {
         params.width = 0;
         cardImage.setLayoutParams(params);
         linearLayout.addView(cardImage);
+    }
+
+    private void updatePlayerCash(int amount) {
+        tv_player_cash.setText("$" + String.valueOf(amount));
+    }
+
+    private void playerIsBroke() {
+        Intent intent = new Intent(application, YoureBroke.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        application.startActivity(intent);
     }
 }

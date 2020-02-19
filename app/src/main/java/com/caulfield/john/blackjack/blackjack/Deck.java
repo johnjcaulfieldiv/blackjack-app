@@ -58,6 +58,8 @@ public class Deck {
         return deck.size() == 0;
     }
 
+    public int getSize() { return deck.size(); }
+
     public Card getTopCard() {
         return deck.get(deck.size()-1);
     }
